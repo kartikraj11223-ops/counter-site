@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  html, body { margin:0; padding:0; overflow-x:hidden; font-family:Segoe UI,Arial,sans-serif; }
+  * { box-sizing:border-box; }
+
+  .responsive-box {
+    display:flex;
+    flex-wrap:wrap;
+    width:100%;
+    padding:0;
+    margin:0;
+  }
+  .responsive-item {
+    width:33.33%;
+    min-width:0;
+    background:#ffffff;
+    border-radius:12px;
+    border:1px solid #ddd;
+    padding:20px;
+    text-align:center;
+    box-shadow:0 3px 8px rgba(0,0,0,0.08);
+  }
+  .responsive-title { font-size:18px; font-weight:700; color:#333; margin-bottom:10px; }
+  .responsive-number { font-size:32px; font-weight:900; color:#0077ff; }
+
+  @media (max-width:600px) {
+    .responsive-item { width:100%; margin-bottom:10px; }
+    .responsive-number { font-size:28px; }
+  }
+</style>
+</head>
+<body>
+  <div class="responsive-box">
+    <div class="responsive-item">
+      <div class="responsive-title">Corporate Event</div>
+      <div class="responsive-number" data-target="1000">0</div>
+    </div>
+    <div class="responsive-item">
+      <div class="responsive-title">Exhibition</div>
+      <div class="responsive-number" data-target="1500">0</div>
+    </div>
+    <div class="responsive-item">
+      <div class="responsive-title">Printing Work</div>
+      <div class="responsive-number" data-target="2000">0</div>
+    </div>
+  </div>
+
+  <script>
+    const nums = document.querySelectorAll(".responsive-number");
+    nums.forEach(num=>{
+      const target=+num.dataset.target;
+      let count=0;
+      let step=Math.ceil(target/100);
+      let speed=20;
+      let run=setInterval(()=>{
+        count+=step;
+        if(count>=target){ num.textContent=target; clearInterval(run); }
+        else { num.textContent=count; }
+      }, speed);
+    });
+  </script>
+</body>
+</html>
